@@ -1,52 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import Todo from './Todo';
-import SimpleForm from './SimpleForm';
+import Counter from './Counter';
+import TodoList from './TodoList';
+import ThemeToggle from './ThemeToggle';
+import FormApp from './FormApp';
 
+/**
+ * Main App Component - Experiment Selector
+ * Allows switching between 4 different React SPA experiments
+ */
 function App() {
-  const [count, setCount] = useState(0);
-  const [theme, setTheme] = useState(() => {
-    try {
-      return localStorage.getItem('theme') || 'light';
-    } catch (e) {
-      return 'light';
-    }
-  });
+  const [currentExperiment, setCurrentExperiment] = useState(1);
 
-  useEffect(() => {
-    try {
-      localStorage.setItem('theme', theme);
-    } catch (e) {}
-  }, [theme]);
+  const experiments = [
+    { id: 1, name: 'Counter SPA', component: Counter },
+    { id: 2, name: 'To-Do List SPA', component: TodoList },
+    { id: 3, name: 'Theme Toggle SPA', component: ThemeToggle },
+    { id: 4, name: 'Form SPA', component: FormApp }
+  ];
 
-  function toggleTheme() {
-    setTheme(t => (t === 'light' ? 'dark' : 'light'));
-  }
+  const CurrentComponent = experiments.find(exp => exp.id === currentExperiment)?.component || Counter;
 
   return (
-    <div className="App" data-theme={theme}>
+    <div className="App">
       <header className="App-header">
-        <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
-          <h1 style={{margin:0}}>Experiment-1: Simple Counter SPA & simple todo list SPA</h1>
-          <button className="btn small" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-          </button>
+        <h1>React SPA Experiments</h1>
+        <p className="subtitle">Select an experiment to view:</p>
+        
+        <div className="experiment-selector">
+          {experiments.map(exp => (
+            <button
+              key={exp.id}
+              className={`btn experiment-btn ${currentExperiment === exp.id ? 'active' : ''}`}
+              onClick={() => setCurrentExperiment(exp.id)}
+            >
+              {exp.id}. {exp.name}
+            </button>
+          ))}
         </div>
-
-        <p className="counter-text">Counter value: <strong>{count}</strong></p>
-
-        <div className="counter-controls">
-          <button className="btn" onClick={() => setCount(c => c - 1)}>-</button>
-          <button className="btn" onClick={() => setCount(0)}>Reset</button>
-          <button className="btn" onClick={() => setCount(c => c + 1)}>+</button>
-        </div>
-
-        <p className="hint">Use the buttons to increment or decrement the counter without reloading.</p>
       </header>
 
       <main className="App-main">
-        <Todo />
-        <SimpleForm />
+        <CurrentComponent />
       </main>
     </div>
   );
