@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-export default function Todo() {
+export default function TodoList() {
   const [tasks, setTasks] = useState([]);
   const [value, setValue] = useState('');
 
@@ -19,6 +19,8 @@ export default function Todo() {
 
   return (
     <section className="todo-section">
+      <h2>Experiment-2: Simple To-Do List SPA</h2>
+      <p className="hint">Add tasks and delete them dynamically without page reload.</p>
 
       <form className="todo-form" onSubmit={addTask}>
         <input
@@ -27,11 +29,11 @@ export default function Todo() {
           value={value}
           onChange={e => setValue(e.target.value)}
         />
-        <button className="btn" type="submit">Add</button>
+        <button className="btn" type="submit">Add Task</button>
       </form>
 
       <ul className="todo-list">
-        {tasks.length === 0 && <li className="empty">No tasks yet</li>}
+        {tasks.length === 0 && <li className="empty">No tasks yet. Add one above!</li>}
         {tasks.map(t => (
           <li key={t.id} className="todo-item">
             <span className="task-text">{t.text}</span>
