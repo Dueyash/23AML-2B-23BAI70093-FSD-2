@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-/**
- * Experiment-3: Theme Toggle SPA
- * Aim: To create a SPA that switches between light and dark mode.
- * Procedure:
- * 1. Use state to track theme
- * 2. Change styles dynamically
- */
 export default function ThemeToggle() {
   const [theme, setTheme] = useState(() => {
     try {
@@ -38,10 +31,10 @@ export default function ThemeToggle() {
         <p className="hint">Click the button below to switch between light and dark mode.</p>
         
         <div className="theme-display">
-          <p>Current theme: <strong>{theme === 'light' ? 'Light Mode ☀️' : 'Dark Mode 🌙'}</strong></p>
+          <p>Current theme: <strong>{theme === 'light' ? 'Light Mode ' : 'Dark Mode '}</strong></p>
           
           <button className="btn theme-btn" onClick={toggleTheme}>
-            {theme === 'light' ? '🌙 Switch to Dark Mode' : '☀️ Switch to Light Mode'}
+            {theme === 'light' ? ' Switch to Dark Mode' : ' Switch to Light Mode'}
           </button>
         </div>
 
