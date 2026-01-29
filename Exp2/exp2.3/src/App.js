@@ -1,365 +1,338 @@
-import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import {
   AppBar,
   Toolbar,
   Typography,
+  IconButton,
   Button,
   Container,
+  Grid,
   Card,
   CardContent,
-  CardMedia,
   CardActions,
-  Grid,
+  CardMedia,
   TextField,
+  Switch,
+  FormControlLabel,
   Box,
   Paper,
-  IconButton,
+  Chip,
+  Rating,
+  LinearProgress,
+  Alert,
+  Snackbar,
   Drawer,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Divider,
-  Chip,
-  Avatar,
-  Fab,
-  Snackbar,
-  Alert
 } from '@mui/material';
 import {
   Menu as MenuIcon,
-  Home as HomeIcon,
-  Info as InfoIcon,
-  ContactMail as ContactIcon,
-  Favorite as FavoriteIcon,
-  Share as ShareIcon,
-  Add as AddIcon
+  AccountCircle,
+  ShoppingCart,
+  Favorite,
+  Search,
+  Home,
+  Info,
+  ContactMail,
+  Settings,
+  Brightness4,
+  Brightness7,
 } from '@mui/icons-material';
+import theme from './theme';
+
+// Sample data for product cards
+const products = [
+  {
+    id: 1,
+    name: 'Wireless Headphones',
+    description: 'Noise-cancelling wireless headphones with 30hr battery',
+    price: '$199.99',
+    rating: 4.5,
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop',
+    category: 'Electronics',
+  },
+  {
+    id: 2,
+    name: 'Smart Watch',
+    description: 'Fitness tracker with heart rate monitor and GPS',
+    price: '$299.99',
+    rating: 4.2,
+    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop',
+    category: 'Wearables',
+  },
+  {
+    id: 3,
+    name: 'Laptop Stand',
+    description: 'Adjustable aluminum stand for ergonomic workspace',
+    price: '$89.99',
+    rating: 4.7,
+    image: 'https://images.unsplash.com/photo-1586950012036-b957f2c7cbf3?w=400&h=300&fit=crop',
+    category: 'Accessories',
+  },
+];
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [search, setSearch] = useState('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const cards = [
-    {
-      id: 1,
-      title: 'Material Design',
-      description: 'Beautiful and intuitive design system created by Google for building modern interfaces.',
-      image: 'https://via.placeholder.com/350x200/1976d2/ffffff?text=Material+Design',
-      category: 'Design'
-    },
-    {
-      id: 2,
-      title: 'React Components',
-      description: 'Pre-built React components following Material Design principles for rapid development.',
-      image: 'https://via.placeholder.com/350x200/388e3c/ffffff?text=React+Components',
-      category: 'Development'
-    },
-    {
-      id: 3,
-      title: 'Responsive Layout',
-      description: 'Grid system and responsive utilities for building mobile-first applications.',
-      image: 'https://via.placeholder.com/350x200/d32f2f/ffffff?text=Responsive',
-      category: 'Layout'
-    },
-    {
-      id: 4,
-      title: 'Customization',
-      description: 'Extensive theming capabilities to match your brand identity and design requirements.',
-      image: 'https://via.placeholder.com/350x200/7b1fa2/ffffff?text=Customization',
-      category: 'Theming'
-    },
-    {
-      id: 5,
-      title: 'Icons Library',
-      description: 'Comprehensive icon library with thousands of Material Design icons ready to use.',
-      image: 'https://via.placeholder.com/350x200/f57c00/ffffff?text=Icons',
-      category: 'Assets'
-    },
-    {
-      id: 6,
-      title: 'Accessibility',
-      description: 'Built-in accessibility features ensuring your app is usable by everyone.',
-      image: 'https://via.placeholder.com/350x200/0097a7/ffffff?text=A11y',
-      category: 'UX'
-    }
-  ];
-
-  const handleDrawerToggle = () => {
-    setDrawerOpen(!drawerOpen);
+  const handleDarkModeToggle = () => {
+    setDarkMode(!darkMode);
   };
 
-  const handleFormChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
     setSnackbarOpen(true);
-    setFormData({ name: '', email: '', message: '' });
   };
 
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };
 
-  const drawer = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={handleDrawerToggle}>
-      <Box sx={{ p: 2 }}>
-        <Typography variant="h6" component="div">
-          Menu
-        </Typography>
-      </Box>
-      <Divider />
-      <List>
-        <ListItem button>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <InfoIcon />
-          </ListItemIcon>
-          <ListItemText primary="About" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <ContactIcon />
-          </ListItemIcon>
-          <ListItemText primary="Contact" />
-        </ListItem>
-      </List>
-    </Box>
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(search.toLowerCase()) ||
+    product.description.toLowerCase().includes(search.toLowerCase())
   );
 
+  const drawerWidth = 240;
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      
       {/* App Bar */}
       <AppBar position="static">
         <Toolbar>
           <IconButton
-            size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
+            onClick={() => setDrawerOpen(true)}
             sx={{ mr: 2 }}
-            onClick={handleDrawerToggle}
           >
             <MenuIcon />
           </IconButton>
+          
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Material UI Demo
+            Material UI Store
           </Typography>
-          <Button color="inherit">Login</Button>
+          
+          {/* Search Bar */}
+          <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
+            <Search sx={{ mr: 1 }} />
+            <TextField
+              variant="outlined"
+              size="small"
+              placeholder="Search products..."
+              value={search}
+              onChange={handleSearchChange}
+              sx={{ 
+                backgroundColor: 'white',
+                borderRadius: 1,
+                '& .MuiOutlinedInput-root': {
+                  height: 40,
+                }
+              }}
+            />
+          </Box>
+          
+          {/* Dark Mode Toggle */}
+          <IconButton color="inherit" onClick={handleDarkModeToggle}>
+            {darkMode ? <Brightness7 /> : <Brightness4 />}
+          </IconButton>
+          
+          <IconButton color="inherit">
+            <Favorite />
+          </IconButton>
+          
+          <IconButton color="inherit">
+            <ShoppingCart />
+          </IconButton>
+          
+          <IconButton color="inherit">
+            <AccountCircle />
+          </IconButton>
         </Toolbar>
       </AppBar>
 
-      {/* Drawer */}
-      <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerToggle}>
-        {drawer}
+      {/* Drawer Navigation */}
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <Box sx={{ width: drawerWidth }}>
+          <Toolbar>
+            <Typography variant="h6">Navigation</Typography>
+          </Toolbar>
+          <Divider />
+          <List>
+            {['Home', 'Products', 'About', 'Contact', 'Settings'].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon>
+                  {index === 0 && <Home />}
+                  {index === 1 && <ShoppingCart />}
+                  {index === 2 && <Info />}
+                  {index === 3 && <ContactMail />}
+                  {index === 4 && <Settings />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
       </Drawer>
 
-      {/* Hero Section */}
-      <Box sx={{ bgcolor: 'primary.main', color: 'white', py: 8 }}>
-        <Container maxWidth="md">
-          <Typography variant="h2" component="h1" gutterBottom align="center">
-            Material UI Components
+      {/* Main Content */}
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        {/* Welcome Section */}
+        <Paper elevation={3} sx={{ p: 3, mb: 4 }}>
+          <Typography variant="h4" gutterBottom>
+            Welcome to Material UI Store
           </Typography>
-          <Typography variant="h5" align="center" paragraph>
-            Build beautiful and responsive interfaces with Material Design
+          <Typography variant="body1" paragraph>
+            Discover amazing products built with Material Design principles. 
+            This interface demonstrates various Material UI components in action.
           </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 4 }}>
-            <Button variant="contained" color="secondary" size="large">
-              Get Started
-            </Button>
-            <Button variant="outlined" color="inherit" size="large">
-              Learn More
-            </Button>
+          
+          {/* Progress Indicator */}
+          <Box sx={{ mt: 2 }}>
+            <Typography variant="body2" gutterBottom>
+              Daily Deal Progress
+            </Typography>
+            <LinearProgress variant="determinate" value={70} sx={{ height: 10, borderRadius: 5 }} />
           </Box>
-        </Container>
-      </Box>
+        </Paper>
 
-      {/* Buttons Section */}
-      <Container sx={{ my: 6 }}>
-        <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
-          Material UI Buttons
+        {/* Featured Products */}
+        <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>
+          Featured Products
         </Typography>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>
-          <Button variant="contained">Contained</Button>
-          <Button variant="outlined">Outlined</Button>
-          <Button variant="text">Text</Button>
-          <Button variant="contained" color="secondary">Secondary</Button>
-          <Button variant="contained" color="success">Success</Button>
-          <Button variant="contained" color="error">Error</Button>
-          <Button variant="contained" color="warning">Warning</Button>
-          <Button variant="contained" color="info">Info</Button>
-          <Button variant="contained" size="small">Small</Button>
-          <Button variant="contained" size="large">Large</Button>
-          <Button variant="contained" disabled>Disabled</Button>
-        </Box>
-      </Container>
-
-      {/* Cards Grid */}
-      <Container sx={{ my: 6 }}>
-        <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
-          Material UI Cards
-        </Typography>
-        <Grid container spacing={4}>
-          {cards.map((card) => (
-            <Grid item key={card.id} xs={12} sm={6} md={4}>
+        
+        <Grid container spacing={3}>
+          {filteredProducts.map((product) => (
+            <Grid item xs={12} sm={6} md={4} key={product.id}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <CardMedia
                   component="img"
                   height="200"
-                  image={card.image}
-                  alt={card.title}
+                  image={product.image}
+                  alt={product.name}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                    <Chip label={card.category} color="primary" size="small" />
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <Typography variant="h6" component="div">
+                      {product.name}
+                    </Typography>
+                    <Chip label={product.category} size="small" color="primary" />
                   </Box>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {card.title}
+                  
+                  <Typography variant="body2" color="text.secondary" paragraph>
+                    {product.description}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {card.description}
+                  
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                    <Rating value={product.rating} precision={0.5} readOnly />
+                    <Typography variant="body2" sx={{ ml: 1 }}>
+                      ({product.rating})
+                    </Typography>
+                  </Box>
+                  
+                  <Typography variant="h6" color="primary">
+                    {product.price}
                   </Typography>
                 </CardContent>
+                
                 <CardActions>
-                  <IconButton aria-label="add to favorites" color="error">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share" color="primary">
-                    <ShareIcon />
-                  </IconButton>
-                  <Button size="small" sx={{ ml: 'auto' }}>Learn More</Button>
+                  <Button 
+                    size="small" 
+                    color="primary"
+                    onClick={() => handleProductClick(product)}
+                  >
+                    Add to Cart
+                  </Button>
+                  <Button size="small" color="secondary">
+                    View Details
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>
           ))}
         </Grid>
-      </Container>
 
-      {/* Text Fields and Form */}
-      <Container sx={{ my: 6 }}>
-        <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
-          Contact Form
-        </Typography>
-        <Paper elevation={3} sx={{ p: 4, maxWidth: 600, mx: 'auto' }}>
-          <Box component="form" onSubmit={handleFormSubmit}>
-            <TextField
-              fullWidth
-              label="Name"
-              name="name"
-              value={formData.name}
-              onChange={handleFormChange}
-              margin="normal"
-              required
-              variant="outlined"
-            />
-            <TextField
-              fullWidth
-              label="Email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleFormChange}
-              margin="normal"
-              required
-              variant="outlined"
-            />
-            <TextField
-              fullWidth
-              label="Message"
-              name="message"
-              value={formData.message}
-              onChange={handleFormChange}
-              margin="normal"
-              required
-              multiline
-              rows={4}
-              variant="outlined"
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              size="large"
-              fullWidth
-              sx={{ mt: 2 }}
-            >
-              Submit
-            </Button>
-          </Box>
+        {/* Contact Form Section */}
+        <Paper elevation={2} sx={{ p: 3, mt: 4 }}>
+          <Typography variant="h5" gutterBottom>
+            Contact Us
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label="Name"
+                variant="outlined"
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label="Email"
+                variant="outlined"
+                margin="normal"
+                type="email"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Message"
+                variant="outlined"
+                margin="normal"
+                multiline
+                rows={4}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Button variant="contained" color="primary">
+                  Send Message
+                </Button>
+                <FormControlLabel
+                  control={<Switch color="primary" />}
+                  label="Subscribe to newsletter"
+                />
+              </Box>
+            </Grid>
+          </Grid>
         </Paper>
+
+        {/* Alert Section */}
+        <Alert severity="info" sx={{ mt: 3 }}>
+          This is an informational alert — Material UI provides various alert types: 
+          success, warning, error, and info.
+        </Alert>
       </Container>
 
-      {/* Avatar Section */}
-      <Container sx={{ my: 6 }}>
-        <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
-          Team Members
-        </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, flexWrap: 'wrap' }}>
-          <Box sx={{ textAlign: 'center' }}>
-            <Avatar sx={{ width: 80, height: 80, bgcolor: 'primary.main', mx: 'auto', mb: 1 }}>JD</Avatar>
-            <Typography variant="subtitle1">John Doe</Typography>
-          </Box>
-          <Box sx={{ textAlign: 'center' }}>
-            <Avatar sx={{ width: 80, height: 80, bgcolor: 'secondary.main', mx: 'auto', mb: 1 }}>JS</Avatar>
-            <Typography variant="subtitle1">Jane Smith</Typography>
-          </Box>
-          <Box sx={{ textAlign: 'center' }}>
-            <Avatar sx={{ width: 80, height: 80, bgcolor: 'success.main', mx: 'auto', mb: 1 }}>AB</Avatar>
-            <Typography variant="subtitle1">Alex Brown</Typography>
-          </Box>
-          <Box sx={{ textAlign: 'center' }}>
-            <Avatar sx={{ width: 80, height: 80, bgcolor: 'warning.main', mx: 'auto', mb: 1 }}>MJ</Avatar>
-            <Typography variant="subtitle1">Mike Johnson</Typography>
-          </Box>
-        </Box>
-      </Container>
-
-      {/* Floating Action Button */}
-      <Fab
-        color="primary"
-        aria-label="add"
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
-      >
-        <AddIcon />
-      </Fab>
-
-      {/* Snackbar */}
+      {/* Snackbar Notification */}
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={4000}
+        autoHideDuration={3000}
         onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-      >
-        <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
-          Form submitted successfully!
-        </Alert>
-      </Snackbar>
-
-      {/* Footer */}
-      <Box sx={{ bgcolor: 'text.secondary', color: 'white', py: 4, mt: 6 }}>
-        <Container>
-          <Typography variant="body1" align="center">
-            &copy; 2026 Material UI Demo - Google Material Design
-          </Typography>
-        </Container>
-      </Box>
-    </Box>
+        message={selectedProduct ? `Added "${selectedProduct.name}" to cart` : ''}
+      />
+    </ThemeProvider>
   );
 }
 

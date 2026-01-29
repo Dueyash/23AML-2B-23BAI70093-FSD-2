@@ -1,259 +1,230 @@
-import './App.css';
-import { useState } from 'react';
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Container,
-  Form,
-  FormControl,
-  Button,
-  Offcanvas
-} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  const [showOffcanvas, setShowOffcanvas] = useState(false);
+// Page Components
+const Home = () => <div className="container mt-5"><h1>Home Page</h1><p>Welcome to our website!</p></div>;
+const Products = () => <div className="container mt-5"><h1>Products</h1><p>Explore our products.</p></div>;
+const About = () => <div className="container mt-5"><h1>About Us</h1><p>Learn more about our company.</p></div>;
+const Contact = () => <div className="container mt-5"><h1>Contact</h1><p>Get in touch with us.</p></div>;
+const Services = () => <div className="container mt-5"><h1>Services</h1><p>Our professional services.</p></div>;
 
-  const handleCloseOffcanvas = () => setShowOffcanvas(false);
-  const handleShowOffcanvas = () => setShowOffcanvas(true);
+// Navbar Component
+function ResponsiveNavbar() {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleToggle = () => {
+    setExpanded(!expanded);
+  };
+
+  const closeNavbar = () => {
+    setExpanded(false);
+  };
 
   return (
-    <div className="App">
-      {/* Main Responsive Navigation Bar */}
-      <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-        <Container fluid>
-          <Navbar.Brand href="#home">
-            <img
-              alt=""
-              src="https://via.placeholder.com/30x30/007bff/ffffff?text=R"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{' '}
-            Responsive Nav
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#about">About</Nav.Link>
-              <Nav.Link href="#services">Services</Nav.Link>
-              <NavDropdown title="Products" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#product1">Product 1</NavDropdown.Item>
-                <NavDropdown.Item href="#product2">Product 2</NavDropdown.Item>
-                <NavDropdown.Item href="#product3">Product 3</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#all-products">
-                  View All Products
-                </NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="#contact">Contact</Nav.Link>
-            </Nav>
-            <Form className="d-flex">
-              <FormControl
-                type="search"
-                placeholder="Search"
-                className="me-2"
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow">
+      <div className="container">
+        {/* Brand/Logo */}
+        <Link className="navbar-brand d-flex align-items-center" to="/" onClick={closeNavbar}>
+          <span className="fw-bold fs-4">BrandName</span>
+          <span className="badge bg-light text-primary ms-2">Pro</span>
+        </Link>
+
+        {/* Mobile Toggle Button */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          onClick={handleToggle}
+          aria-controls="navbarNav"
+          aria-expanded={expanded}
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        {/* Collapsible Content */}
+        <div className={`collapse navbar-collapse ${expanded ? 'show' : ''}`} id="navbarNav">
+          {/* Main Navigation Links - Left Side */}
+          <ul className="navbar-nav me-auto">
+            <li className="nav-item">
+              <NavLink 
+                className="nav-link" 
+                to="/" 
+                onClick={closeNavbar}
+                style={({ isActive }) => ({
+                  fontWeight: isActive ? 'bold' : 'normal',
+                  backgroundColor: isActive ? 'rgba(255,255,255,0.2)' : 'transparent'
+                })}
+              >
+                <i className="bi bi-house-door me-1"></i> Home
+              </NavLink>
+            </li>
+            <li className="nav-item dropdown">
+              <a 
+                className="nav-link dropdown-toggle" 
+                href="#products" 
+                role="button" 
+                data-bs-toggle="dropdown"
+                onClick={closeNavbar}
+              >
+                <i className="bi bi-box-seam me-1"></i> Products
+              </a>
+              <ul className="dropdown-menu">
+                <li><Link className="dropdown-item" to="/products" onClick={closeNavbar}>All Products</Link></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><a className="dropdown-item" href="#electronics" onClick={closeNavbar}>Electronics</a></li>
+                <li><a className="dropdown-item" href="#clothing" onClick={closeNavbar}>Clothing</a></li>
+                <li><a className="dropdown-item" href="#books" onClick={closeNavbar}>Books</a></li>
+              </ul>
+            </li>
+            <li className="nav-item">
+              <NavLink 
+                className="nav-link" 
+                to="/services" 
+                onClick={closeNavbar}
+                style={({ isActive }) => ({
+                  fontWeight: isActive ? 'bold' : 'normal'
+                })}
+              >
+                <i className="bi bi-gear me-1"></i> Services
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink 
+                className="nav-link" 
+                to="/about" 
+                onClick={closeNavbar}
+                style={({ isActive }) => ({
+                  fontWeight: isActive ? 'bold' : 'normal'
+                })}
+              >
+                <i className="bi bi-info-circle me-1"></i> About
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink 
+                className="nav-link" 
+                to="/contact" 
+                onClick={closeNavbar}
+                style={({ isActive }) => ({
+                  fontWeight: isActive ? 'bold' : 'normal'
+                })}
+              >
+                <i className="bi bi-telephone me-1"></i> Contact
+              </NavLink>
+            </li>
+          </ul>
+
+          {/* Search Bar - Visible on desktop, hidden on mobile */}
+          <form className="d-none d-lg-flex me-3" role="search">
+            <div className="input-group">
+              <input 
+                type="search" 
+                className="form-control" 
+                placeholder="Search..." 
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+              <button className="btn btn-outline-light" type="submit">
+                <i className="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
 
-      {/* Hero Section */}
-      <div className="hero-section">
-        <Container>
-          <h1 className="display-3">Responsive Navigation Bar</h1>
-          <p className="lead">
-            A fully responsive navigation bar built with React Bootstrap
-          </p>
-          <p>
-            Try resizing your browser window to see the navigation bar adapt to different screen sizes.
-            On mobile devices, the navigation collapses into a hamburger menu.
-          </p>
-          <Button variant="primary" size="lg" className="me-2">
-            Get Started
-          </Button>
-          <Button variant="outline-light" size="lg">
-            Learn More
-          </Button>
-        </Container>
+          {/* User Actions - Right Side */}
+          <ul className="navbar-nav">
+            <li className="nav-item dropdown">
+              <a 
+                className="nav-link dropdown-toggle d-flex align-items-center" 
+                href="#user" 
+                role="button" 
+                data-bs-toggle="dropdown"
+              >
+                <i className="bi bi-person-circle me-1"></i>
+                <span className="d-none d-md-inline">Account</span>
+              </a>
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li><a className="dropdown-item" href="#profile"><i className="bi bi-person me-2"></i>Profile</a></li>
+                <li><a className="dropdown-item" href="#settings"><i className="bi bi-gear me-2"></i>Settings</a></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><a className="dropdown-item text-danger" href="#logout"><i className="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+              </ul>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link position-relative" href="#cart">
+                <i className="bi bi-cart3"></i>
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  3
+                </span>
+              </a>
+            </li>
+            <li className="nav-item d-lg-none mt-2">
+              {/* Mobile Search */}
+              <div className="input-group">
+                <input 
+                  type="search" 
+                  className="form-control" 
+                  placeholder="Search..." 
+                  aria-label="Search"
+                />
+                <button className="btn btn-outline-primary" type="button">
+                  <i className="bi bi-search"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
+    </nav>
+  );
+}
 
-      {/* Features Section */}
-      <Container className="my-5">
-        <h2 className="text-center mb-5">Navigation Features</h2>
-        <div className="row">
-          <div className="col-md-4 mb-4">
-            <div className="feature-card">
-              <div className="feature-icon">📱</div>
-              <h3>Mobile Responsive</h3>
-              <p>
-                Automatically collapses into a hamburger menu on smaller screens,
-                providing an optimal mobile experience.
-              </p>
-            </div>
+// Main App Component
+function App() {
+  return (
+    <Router>
+      <ResponsiveNavbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      
+      {/* Responsive Behavior Info */}
+      <div className="container mt-5">
+        <div className="card">
+          <div className="card-header bg-info text-white">
+            <h5 className="mb-0">Responsive Behavior</h5>
           </div>
-          <div className="col-md-4 mb-4">
-            <div className="feature-card">
-              <div className="feature-icon">🔗</div>
-              <h3>Navigation Links</h3>
-              <p>
-                Multiple navigation links organized in a clean and accessible
-                layout with dropdown menus for subcategories.
-              </p>
-            </div>
-          </div>
-          <div className="col-md-4 mb-4">
-            <div className="feature-card">
-              <div className="feature-icon">🎨</div>
-              <h3>Customizable</h3>
-              <p>
-                Easy to customize colors, styles, and layout using Bootstrap
-                variants and CSS classes.
-              </p>
-            </div>
-          </div>
-          <div className="col-md-4 mb-4">
-            <div className="feature-card">
-              <div className="feature-icon">🔍</div>
-              <h3>Search Bar</h3>
-              <p>
-                Integrated search functionality that remains accessible across
-                all device sizes.
-              </p>
-            </div>
-          </div>
-          <div className="col-md-4 mb-4">
-            <div className="feature-card">
-              <div className="feature-icon">📂</div>
-              <h3>Dropdown Menus</h3>
-              <p>
-                Organized dropdown menus for better content hierarchy and
-                improved navigation structure.
-              </p>
-            </div>
-          </div>
-          <div className="col-md-4 mb-4">
-            <div className="feature-card">
-              <div className="feature-icon">📍</div>
-              <h3>Sticky Position</h3>
-              <p>
-                Navbar stays visible at the top of the page as you scroll,
-                ensuring easy navigation at all times.
-              </p>
-            </div>
-          </div>
-        </div>
-      </Container>
-
-      {/* Alternative Navigation Example - Offcanvas */}
-      <Container className="my-5 py-5 bg-light">
-        <h2 className="text-center mb-4">Alternative: Offcanvas Navigation</h2>
-        <p className="text-center mb-4">
-          Another responsive navigation pattern using Bootstrap Offcanvas component
-        </p>
-        <div className="text-center">
-          <Button variant="primary" onClick={handleShowOffcanvas}>
-            Open Offcanvas Menu
-          </Button>
-        </div>
-
-        <Offcanvas show={showOffcanvas} onHide={handleCloseOffcanvas} placement="start">
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Navigation Menu</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav className="flex-column">
-              <Nav.Link href="#home" className="border-bottom py-3">🏠 Home</Nav.Link>
-              <Nav.Link href="#about" className="border-bottom py-3">ℹ️ About</Nav.Link>
-              <Nav.Link href="#services" className="border-bottom py-3">⚙️ Services</Nav.Link>
-              <Nav.Link href="#portfolio" className="border-bottom py-3">💼 Portfolio</Nav.Link>
-              <Nav.Link href="#contact" className="border-bottom py-3">📧 Contact</Nav.Link>
-            </Nav>
-            <div className="mt-4">
-              <h6>Connect With Us</h6>
-              <div className="d-flex gap-2 mt-3">
-                <Button variant="outline-primary" size="sm">Facebook</Button>
-                <Button variant="outline-info" size="sm">Twitter</Button>
-                <Button variant="outline-danger" size="sm">Instagram</Button>
+          <div className="card-body">
+            <div className="row">
+              <div className="col-md-4">
+                <div className="text-center p-3 border rounded">
+                  <i className="bi bi-phone fs-1 text-primary"></i>
+                  <h6 className="mt-2">Mobile View</h6>
+                  <p className="text-muted small">Hamburger menu with collapsed navigation</p>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="text-center p-3 border rounded">
+                  <i className="bi bi-tablet fs-1 text-primary"></i>
+                  <h6 className="mt-2">Tablet View</h6>
+                  <p className="text-muted small">Adaptive layout with visible main links</p>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="text-center p-3 border rounded">
+                  <i className="bi bi-laptop fs-1 text-primary"></i>
+                  <h6 className="mt-2">Desktop View</h6>
+                  <p className="text-muted small">Full navigation bar with search and user menu</p>
+                </div>
               </div>
             </div>
-          </Offcanvas.Body>
-        </Offcanvas>
-      </Container>
-
-      {/* Navbar Variants Section */}
-      <Container className="my-5">
-        <h2 className="text-center mb-5">Different Navbar Styles</h2>
-        
-        {/* Light Navbar */}
-        <div className="mb-4">
-          <h4>Light Navbar</h4>
-          <Navbar bg="light" variant="light" expand="lg">
-            <Container>
-              <Navbar.Brand href="#home">Light Theme</Navbar.Brand>
-              <Navbar.Toggle aria-controls="light-navbar" />
-              <Navbar.Collapse id="light-navbar">
-                <Nav className="me-auto">
-                  <Nav.Link href="#home">Home</Nav.Link>
-                  <Nav.Link href="#features">Features</Nav.Link>
-                  <Nav.Link href="#pricing">Pricing</Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
-            </Container>
-          </Navbar>
-        </div>
-
-        {/* Primary Navbar */}
-        <div className="mb-4">
-          <h4>Primary Color Navbar</h4>
-          <Navbar bg="primary" variant="dark" expand="lg">
-            <Container>
-              <Navbar.Brand href="#home">Primary Theme</Navbar.Brand>
-              <Navbar.Toggle aria-controls="primary-navbar" />
-              <Navbar.Collapse id="primary-navbar">
-                <Nav className="me-auto">
-                  <Nav.Link href="#home">Home</Nav.Link>
-                  <Nav.Link href="#features">Features</Nav.Link>
-                  <Nav.Link href="#pricing">Pricing</Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
-            </Container>
-          </Navbar>
-        </div>
-
-        {/* Success Navbar */}
-        <div className="mb-4">
-          <h4>Success Color Navbar</h4>
-          <Navbar bg="success" variant="dark" expand="lg">
-            <Container>
-              <Navbar.Brand href="#home">Success Theme</Navbar.Brand>
-              <Navbar.Toggle aria-controls="success-navbar" />
-              <Navbar.Collapse id="success-navbar">
-                <Nav className="me-auto">
-                  <Nav.Link href="#home">Home</Nav.Link>
-                  <Nav.Link href="#features">Features</Nav.Link>
-                  <Nav.Link href="#pricing">Pricing</Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
-            </Container>
-          </Navbar>
-        </div>
-      </Container>
-
-      {/* Footer */}
-      <footer className="bg-dark text-white py-4 mt-5">
-        <Container>
-          <div className="text-center">
-            <p className="mb-0">&copy; 2026 Responsive Navigation Demo</p>
-            <p className="mb-0">Built with React Bootstrap</p>
           </div>
-        </Container>
-      </footer>
-    </div>
+        </div>
+      </div>
+    </Router>
   );
 }
 
