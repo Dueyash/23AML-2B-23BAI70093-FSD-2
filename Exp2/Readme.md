@@ -21,17 +21,16 @@ All components are organized into separate folders and rendered together in one 
 ## Screenshots
 
 ### Navbar
-Exp2/ss/image.png
+![Exp2/ss/image.png](ss/image.png)
 
 ### Bootstrap Form
-Exp2/ss/Screenshot 2026-01-29 095445.png
+![Exp2/ss/Screenshot 2026-01-29 095445.png](<ss/Screenshot 2026-01-29 095228.png>)
 
 ### Material UI Form
-Exp2/ss/Screenshot 2026-01-29 095355.png
+![Exp2/ss/Screenshot 2026-01-29 095355.png](<exp2.1/ss/Screenshot 2026-01-29 095355.png>)
 
 ### Card UI
-Exp2/ss/Screenshot 2026-01-29 095228.png
-
+![Exp2/ss/Screenshot 2026-01-29 095445.png](<ss/Screenshot 2026-01-29 095445.png>)
 
 ## How to Run
 ```bash
