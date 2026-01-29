@@ -1,0 +1,16 @@
+/* Minimal custom styles - Bootstrap handles most styling */
+.nav-item .btn-link {
+  text-decoration: none;
+  border: none;
+  background: none;
+  padding: 0.5rem 1rem;
+}
+
+.nav-item .btn-link:focus {
+  box-shadow: none;
+}
+
+.nav-item .btn-link.nav-link.active {
+  font-weight: 600;
+}
+
