@@ -6,7 +6,7 @@ A comprehensive React-based web application to track expenses and subscriptions 
 People often forget about their subscriptions and end up overspending on services they rarely use. Tracking multiple expenses across different platforms becomes overwhelming and leads to poor financial management.
 
 ## Solution
-SubTrack provides a single, unified dashboard to track all your expenses and subscriptions with intelligent insights and alerts.
+It provides a single, unified dashboard to track all your expenses and subscriptions with intelligent insights and alerts.
 
 ## Key Features
 
