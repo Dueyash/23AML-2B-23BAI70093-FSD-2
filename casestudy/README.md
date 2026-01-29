@@ -46,6 +46,17 @@ SubTrack provides a single, unified dashboard to track all your expenses and sub
 - Calculate potential monthly savings
 - Priority-based suggestion system (high/medium/low)
 
+## Screenshots
+
+### Dashboard Overview
+![Dashboard](ss/image.png)
+
+### Feature Interface 1
+![Feature Interface 1](ss/Screenshot%202026-01-29%20100205.png)
+
+### Feature Interface 2
+![Feature Interface 2](ss/Screenshot%202026-01-29%20100237.png)
+
 ## Additional Features
 - Local storage persistence (data saved in browser)
 - Responsive design for mobile and desktop
