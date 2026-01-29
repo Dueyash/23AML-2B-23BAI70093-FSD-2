@@ -1,4 +1,4 @@
-# SubTrack - Subscription & Expense Manager
+## Subscription & Expense Manager
 
 A comprehensive React-based web application to track expenses and subscriptions in one centralized dashboard.
 

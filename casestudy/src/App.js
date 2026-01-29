@@ -55,7 +55,7 @@ function App() {
     <div className="App">
       <header className="bg-gradient text-white py-4 mb-0" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
         <div className="container text-center">
-          <h1 className="display-4 fw-bold mb-2">SubTrack - Subscription & Expense Manager</h1>
+          <h1 className="display-4 fw-bold mb-2">Subscription & Expense Manager</h1>
           <p className="lead mb-0">Track all your expenses and subscriptions in one place</p>
         </div>
       </header>
