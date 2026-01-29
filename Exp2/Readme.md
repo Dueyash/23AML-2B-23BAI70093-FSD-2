@@ -27,7 +27,7 @@ All components are organized into separate folders and rendered together in one 
 ![Exp2/ss/Screenshot 2026-01-29 095445.png](<ss/Screenshot 2026-01-29 095228.png>)
 
 ### Material UI Form
-![Exp2/ss/Screenshot 2026-01-29 095355.png](<ss/Screenshot 2026-01-29 095445.png>)
+![Exp2/ss/Screenshot 2026-01-29 095355.png](<ss/Screenshot 2026-01-29 095355.png>)
 
 ### Card UI
 ![Exp2/ss/Screenshot 2026-01-29 095445.png](<ss/Screenshot 2026-01-29 095445.png>)
