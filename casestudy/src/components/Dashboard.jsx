@@ -87,7 +87,7 @@ const Dashboard = ({ expenses, subscriptions, deleteExpense }) => {
           <div className="card h-100 shadow-sm border-0">
             <div className="card-body">
               <h6 className="card-subtitle mb-2 text-muted text-uppercase">Total Expenses</h6>
-              <h2 className="card-title display-6 fw-bold text-dark mb-0">${getTotalExpenses()}</h2>
+              <h2 className="card-title display-6 fw-bold text-dark mb-0">₹{getTotalExpenses()}</h2>
             </div>
           </div>
         </div>
@@ -95,7 +95,7 @@ const Dashboard = ({ expenses, subscriptions, deleteExpense }) => {
           <div className="card h-100 shadow-sm border-0">
             <div className="card-body">
               <h6 className="card-subtitle mb-2 text-muted text-uppercase">This Month</h6>
-              <h2 className="card-title display-6 fw-bold text-dark mb-0">${getCurrentMonthExpenses()}</h2>
+              <h2 className="card-title display-6 fw-bold text-dark mb-0">₹{getCurrentMonthExpenses()}</h2>
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@ const Dashboard = ({ expenses, subscriptions, deleteExpense }) => {
           <div className="card h-100 shadow-sm border-0">
             <div className="card-body">
               <h6 className="card-subtitle mb-2 text-muted text-uppercase">Monthly Subscriptions</h6>
-              <h2 className="card-title display-6 fw-bold text-dark mb-0">${getMonthlySubscriptionCost()}</h2>
+              <h2 className="card-title display-6 fw-bold text-dark mb-0">₹{getMonthlySubscriptionCost()}</h2>
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@ const Dashboard = ({ expenses, subscriptions, deleteExpense }) => {
                   getExpensesByCategory().map(([category, amount]) => (
                     <div key={category} className="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
                       <span className="text-secondary">{category}</span>
-                      <span className="badge bg-dark rounded-pill fs-6">${amount.toFixed(2)}</span>
+                      <span className="badge bg-dark rounded-pill fs-6">₹{amount.toFixed(2)}</span>
                     </div>
                   ))
                 ) : (

@@ -22,7 +22,7 @@ const AISuggestions = ({ expenses, subscriptions }) => {
             type: 'cancel',
             priority: 'high',
             title: `Consider canceling ${sub.name}`,
-            description: `You haven't used this subscription in ${daysSinceUsed} days. Canceling could save you $${sub.amount}/${sub.frequency}.`,
+            description: `You haven't used this subscription in ${daysSinceUsed} days. Canceling could save you ₹${sub.amount}/${sub.frequency}.`,
             savings: parseFloat(sub.amount)
           });
         }
@@ -44,7 +44,7 @@ const AISuggestions = ({ expenses, subscriptions }) => {
           type: 'optimize',
           priority: 'medium',
           title: `Multiple ${category} subscriptions detected`,
-          description: `You have ${subs.length} ${category.toLowerCase()} subscriptions totaling $${total.toFixed(2)}/month. Consider consolidating to one service.`,
+          description: `You have ${subs.length} ${category.toLowerCase()} subscriptions totaling ₹${total.toFixed(2)}/month. Consider consolidating to one service.`,
           savings: total * 0.5
         });
       }
@@ -63,7 +63,7 @@ const AISuggestions = ({ expenses, subscriptions }) => {
         type: 'reduce',
         priority: 'medium',
         title: `High spending in ${highestCategory[0]}`,
-        description: `You've spent $${highestCategory[1].toFixed(2)} on ${highestCategory[0]}. Consider setting a monthly budget to reduce costs by 15-20%.`,
+        description: `You've spent ₹${highestCategory[1].toFixed(2)} on ${highestCategory[0]}. Consider setting a monthly budget to reduce costs by 15-20%.`,
         savings: highestCategory[1] * 0.15
       });
     }
@@ -184,7 +184,7 @@ const AISuggestions = ({ expenses, subscriptions }) => {
       <div className="card shadow-sm border-0 mb-4" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
         <div className="card-body text-white text-center py-4">
           <h5 className="mb-2">Potential Monthly Savings</h5>
-          <h1 className="display-3 fw-bold mb-2">${getTotalPotentialSavings()}</h1>
+          <h1 className="display-3 fw-bold mb-2">₹{getTotalPotentialSavings()}</h1>
           <p className="mb-0">{suggestions.length} suggestions available</p>
         </div>
       </div>

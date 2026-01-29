@@ -152,7 +152,7 @@ const MonthlyInsights = ({ expenses, subscriptions }) => {
           <div className="card h-100 shadow-sm border-0">
             <div className="card-body text-center">
               <h6 className="card-subtitle mb-2 text-muted text-uppercase">Total Spending</h6>
-              <h2 className="display-5 fw-bold text-primary mb-2">${getMonthlyTotal().toFixed(2)}</h2>
+              <h2 className="display-5 fw-bold text-primary mb-2">₹{getMonthlyTotal().toFixed(2)}</h2>
               <p className="mb-0 small">
                 <span className={comparison.increased ? 'text-danger' : 'text-success'}>
                   {comparison.increased ? '↑' : '↓'} {comparison.increased ? '+' : ''}{comparison.percentChange}%
@@ -166,7 +166,7 @@ const MonthlyInsights = ({ expenses, subscriptions }) => {
           <div className="card h-100 shadow-sm border-0">
             <div className="card-body text-center">
               <h6 className="card-subtitle mb-2 text-muted text-uppercase">Subscription Costs</h6>
-              <h2 className="display-5 fw-bold text-primary mb-2">${getMonthlySubscriptionCost().toFixed(2)}</h2>
+              <h2 className="display-5 fw-bold text-primary mb-2">₹{getMonthlySubscriptionCost().toFixed(2)}</h2>
               <p className="mb-0 small text-muted">{subscriptions.length} active subscriptions</p>
             </div>
           </div>
@@ -176,7 +176,7 @@ const MonthlyInsights = ({ expenses, subscriptions }) => {
           <div className="card h-100 shadow-sm border-0">
             <div className="card-body text-center">
               <h6 className="card-subtitle mb-2 text-muted text-uppercase">Average Daily</h6>
-              <h2 className="display-5 fw-bold text-primary mb-2">${getAverageDaily()}</h2>
+              <h2 className="display-5 fw-bold text-primary mb-2">₹{getAverageDaily()}</h2>
               <p className="mb-0 small text-muted">Based on {monthlyExpenses.length} transactions</p>
             </div>
           </div>
@@ -204,7 +204,7 @@ const MonthlyInsights = ({ expenses, subscriptions }) => {
                     <div key={item.category} className="mb-3">
                       <div className="d-flex justify-content-between mb-1">
                         <span className="text-secondary">{item.category}</span>
-                        <span className="fw-semibold">${item.amount.toFixed(2)} ({item.percentage}%)</span>
+                        <span className="fw-semibold">₹{item.amount.toFixed(2)} ({item.percentage}%)</span>
                       </div>
                       <div className="progress" style={{ height: '8px' }}>
                         <div 
@@ -230,7 +230,7 @@ const MonthlyInsights = ({ expenses, subscriptions }) => {
                 {getSpendingTrend().map((trend, index) => (
                   <div key={index} className="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
                     <span className="text-secondary">{trend.month} {trend.year}</span>
-                    <span className="badge bg-primary rounded-pill fs-6">${trend.total}</span>
+                    <span className="badge bg-primary rounded-pill fs-6">₹{trend.total}</span>
                   </div>
                 ))}
               </div>
@@ -250,7 +250,7 @@ const MonthlyInsights = ({ expenses, subscriptions }) => {
                         <div className="fw-bold">{exp.name}</div>
                         <small className="text-muted">{exp.date}</small>
                       </div>
-                      <span className="badge bg-primary rounded-pill">${parseFloat(exp.amount).toFixed(2)}</span>
+                      <span className="badge bg-primary rounded-pill">₹{parseFloat(exp.amount).toFixed(2)}</span>
                     </div>
                   ))}
                 </div>

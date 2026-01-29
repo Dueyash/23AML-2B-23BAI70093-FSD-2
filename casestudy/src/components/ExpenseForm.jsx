@@ -101,7 +101,7 @@ const ExpenseForm = ({ onAddExpense, onAddSubscription }) => {
               <div className="mb-3">
                 <label className="form-label fw-semibold">Amount *</label>
                 <div className="input-group">
-                  <span className="input-group-text">$</span>
+                  <span className="input-group-text">₹</span>
                   <input
                     type="number"
                     className="form-control"

@@ -51,11 +51,11 @@ const SubscriptionList = ({ subscriptions, onDelete }) => {
               <div className="d-flex justify-content-md-end gap-4 mt-3 mt-md-0">
                 <div className="text-center">
                   <small className="text-muted d-block">Monthly Total</small>
-                  <h4 className="mb-0 text-primary">${getTotalMonthly()}</h4>
+                  <h4 className="mb-0 text-primary">₹{getTotalMonthly()}</h4>
                 </div>
                 <div className="text-center">
                   <small className="text-muted d-block">Yearly Total</small>
-                  <h4 className="mb-0 text-primary">${getTotalYearly()}</h4>
+                  <h4 className="mb-0 text-primary">₹{getTotalYearly()}</h4>
                 </div>
               </div>
             </div>
@@ -81,12 +81,12 @@ const SubscriptionList = ({ subscriptions, onDelete }) => {
                     <ul className="list-unstyled">
                       <li className="d-flex justify-content-between py-2 border-bottom">
                         <span className="text-muted">Amount:</span>
-                        <span className="fw-semibold">${parseFloat(sub.amount).toFixed(2)} / {sub.frequency}</span>
+                        <span className="fw-semibold">₹{parseFloat(sub.amount).toFixed(2)} / {sub.frequency}</span>
                       </li>
 
                       <li className="d-flex justify-content-between py-2 border-bottom">
                         <span className="text-muted">Annual Cost:</span>
-                        <span className="fw-semibold">${calculateAnnualCost(sub.amount, sub.frequency)}</span>
+                        <span className="fw-semibold">₹{calculateAnnualCost(sub.amount, sub.frequency)}</span>
                       </li>
 
                       {sub.category && (
