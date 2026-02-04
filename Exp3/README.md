@@ -1,14 +1,18 @@
 # Experiment 3: Implement Routing in SPA
 
 ## Aim
+
 To design a React application using **React-Router-Dom** and **Routing** components.
 
 ## Tools & Libraries
+
 - React (Vite)
 - React Router
 
 ## Description
+
 This project demonstrates a single React application that includes:
+
 - A **Navbar**
 - A **Profile**
 - A **Dashboard**
@@ -19,15 +23,20 @@ All components are organized into separate folders and rendered together in one 
 ## Screenshots
 
 ### Profile
-![Exp2/ss/image.png](ss/image.png)
+
+![Exp3/ss/Screenshot 2026-02-04 155311.png](<ss/Screenshot 2026-02-04 155311.png>)
 
 ### Dashboard
-![Exp2/ss/Screenshot 2026-01-29 095445.png](<ss/Screenshot 2026-01-29 095228.png>)
+
+![Exp3/ss/Screenshot 2026-02-04 155350.png](<ss/Screenshot 2026-02-04 155350.png>)
 
 ### Buttons and switching
-![Exp2/ss/Screenshot 2026-01-29 095355.png](<ss/Screenshot 2026-01-29 095355.png>)
+
+![Exp3/ss/Screenshot 2026-02-04 155522.png](<ss/Screenshot 2026-02-04 155522.png>)
 
 ## How to Run
+
 ```bash
 npm install
 npm run dev
+```
