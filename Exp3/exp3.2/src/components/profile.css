@@ -1,0 +1,128 @@
+.profile-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  background-color: #505c75;
+  min-height: 84.5vh;
+}
+
+.profile-sidebar {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.profile-avatar {
+  margin-bottom: 1rem;
+}
+
+.profile-avatar img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid #d0d7de;
+}
+
+.profile-name {
+  font-size: 1.6rem;
+  margin: 0.5rem 0;
+  color: #1f2328;
+}
+
+.profile-username {
+  font-size: 1.2rem;
+  color: #656d76;
+  margin: 0 0 1rem 0;
+}
+
+.profile-bio {
+  color: #1f2328;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.profile-main {
+  flex: 1;
+}
+
+.profile-main h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: #1f2328;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  background: white;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 1.25rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.project-card h3 {
+  color: #0969da;
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+  cursor: pointer;
+}
+
+.project-card h3:hover {
+  text-decoration: underline;
+}
+
+.project-description {
+  color: #656d76;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1rem 0;
+  line-height: 1.5;
+}
+
+.project-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #656d76;
+}
+
+.project-language {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.language-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #f1e05a;
+}
+
+@media (max-width: 1024px) {
+  .profile-container {
+    flex-direction: column;
+  }
+
+  .profile-sidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
