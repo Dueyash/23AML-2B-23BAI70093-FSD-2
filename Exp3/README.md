@@ -1,4 +1,4 @@
-# Experiment 2: Implpement Routing in SPA
+# Experiment 3: Implement Routing in SPA
 
 ## Aim
 To design a React application using **React-Router-Dom** and **Routing** components.
