@@ -30,7 +30,7 @@ This project demonstrates a single React application that includes:
 
 ### About
 
-![Exp5/exp5.2/public/SS/Screenshot 2026-02-19 103507.png](<public/SS/Screenshot 2026-02-19 103507.png>)
+![Exp5/exp5.2/public/SS/Screenshot 2026-02-19 094342.png](<public/SS/Screenshot 2026-02-19 094342.png>)
 
 ### Contact
 
