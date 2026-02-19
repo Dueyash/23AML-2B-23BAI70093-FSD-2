@@ -24,9 +24,17 @@ This project demonstrates a single React application that includes:
 
 ![Exp5/exp5.2/public/SS/Screenshot 2026-02-19 094425.png](<public/SS/Screenshot 2026-02-19 094425.png>)
 
-### Dashboard
+### Home
 
 ![Exp5/exp5.2/public/SS/Screenshot 2026-02-19 094342.png](<public/SS/Screenshot 2026-02-19 094342.png>)
+
+### About
+
+![Exp5/exp5.2/public/SS/Screenshot 2026-02-19 103507.png](<public/SS/Screenshot 2026-02-19 103507.png>)
+
+### Contact
+
+![Exp5/exp5.2/public/SS/Screenshot 2026-02-19 103526.png](<public/SS/Screenshot 2026-02-19 103526.png>)
 
 ## How to Run
 
