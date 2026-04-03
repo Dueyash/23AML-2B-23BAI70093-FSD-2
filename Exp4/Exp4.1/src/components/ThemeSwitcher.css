@@ -1,0 +1,46 @@
+.theme-switcher {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  color: white;
+  text-align: center;
+}
+
+.theme-switcher h3 {
+  margin: 0 0 15px 0;
+  font-size: 1.5rem;
+}
+
+.toggle-btn {
+  background-color: white;
+  color: #667eea;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.theme-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-size: 0.9rem;
+}
+
+.theme-description {
+  margin-top: 15px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
